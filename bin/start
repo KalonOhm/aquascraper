@@ -1,0 +1,4 @@
+
+require './lib/aquascraper.rb'
+
+CLI.new.run

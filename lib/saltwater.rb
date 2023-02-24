@@ -1,0 +1,3 @@
+class Saltwater < FishFacts
+
+end

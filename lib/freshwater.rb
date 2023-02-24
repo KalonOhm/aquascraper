@@ -1,0 +1,3 @@
+class Freshwater < FishFacts
+  
+end

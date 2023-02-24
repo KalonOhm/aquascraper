@@ -1,0 +1,3 @@
+class BrackishWater < FishFacts
+
+end
