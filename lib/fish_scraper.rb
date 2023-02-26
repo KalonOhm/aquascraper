@@ -4,11 +4,8 @@ require 'open-uri'
 
 require_relative 'printable.rb'
 
-
 class FishScraper 
-
   SCRAPE_URL = "https://en.wikipedia.org/wiki/List_of_"
-
   def self.scrape_freshwater
     scrape_url = SCRAPE_URL + "freshwater_aquarium_fish_species"
     doc = Nokogiri::HTML(URI.open(scrape_url))
@@ -26,9 +23,10 @@ class FishScraper
     #    end  
     #  end  
     # this will print out individually every single fish in the list. I checked first and last, and they matched up. That it's quite what I was going for though. 
+    
       fish_rows = doc.css('table.wikitable.sortable tbody tr')
      row_count = fish_rows.count
-     
+     binding.pry
       fish_rows[1..row_count].each do |fish_row|
         # skip headers (th)
         next if fish_row.css('th').any?
@@ -42,14 +40,9 @@ class FishScraper
         # need to remove "()" and possibly in
         other_remarks = cell[4].text
         # need to remove \n chars.
-      
      end
-
-    binding.pry
-
-
+    
   end
-
 
   def self.scrape_brackish_water
     scrape_url = SCRAPE_URL + "brackish_aquarium_fish_species"
@@ -58,12 +51,12 @@ class FishScraper
     
     fish_rows = doc.css('table.sortable.collapsible tbody tr')
      row_count = fish_rows.count
-     
+     binding.pry
       fish_rows[1..row_count].each do |fish_row|
         # skip headers (th)
         next if fish_row.css('th').any?
         cell = fish_row.css('td')
-
+        
         common_name = cell[0].text
         taxonomic_name = cell[1].text
         image_url = "https:" + cell[2].css('img').first['src']
@@ -72,7 +65,7 @@ class FishScraper
         # need to remove "()" and possibly in
         other_remarks = cell[4].text
         # need to remove \n chars.
-
+      end
 
 
   end
@@ -85,12 +78,12 @@ class FishScraper
 
     fish_rows = doc.css('table.sortable.collapsible tbody tr')
      row_count = fish_rows.count
-     
+     binding.pry
       fish_rows[1..row_count].each do |fish_row|
         # skip headers (th)
         next if fish_row.css('th').any?
         cell = fish_row.css('td')
-
+        
         common_name = cell[0].text
         taxonomic_name = cell[2].text
         image_url = "https:" + cell[1].css('img').first['src']
@@ -101,7 +94,8 @@ class FishScraper
         # need to remove \n chars.
 
 
+    end
   end
-end
 
-binding.pry
+  binding.pry
+end
