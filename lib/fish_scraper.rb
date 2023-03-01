@@ -26,12 +26,12 @@ class FishScraper
     
       fish_rows = doc.css('table.wikitable.sortable tbody tr')
      row_count = fish_rows.count
-     binding.pry
+     
       fish_rows[1..row_count].each do |fish_row|
         # skip headers (th)
         next if fish_row.css('th').any?
         cell = fish_row.css('td')
-
+binding.pry
         common_name = cell[0].text
         taxonomic_name = cell[1].text
         image_url = "https:" + cell[2].css('img').first['src']
